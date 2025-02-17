@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Day</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #843333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+            background-image: url("https://4kwallpapers.com/images/wallpapers/day-trading-8k-5k-3840x2160-13776.png"); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+            color: rgb(255, 0, 0);
+        }
+
+        header {
+            background-color: #33333300;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #4444440d;
+            color: white;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin: 0 1em;
+        }
+
+        main {
+            padding: 2em;
+            flex-grow: 1; 
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .auth-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2em;
+            border-radius: 30px;
+            box-shadow: 0 2px 4px rgb(2, 2, 2);
+            width: 300px;
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+
+        .form-group {
+            margin-bottom: 1em;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+        input[type="text"],
+        input[type="password"] 
+        {
+            width: 100%;
+            padding: 0.5em;
+            border: 1px solid #00000000;
+            border-radius: 5px;
+            box-sizing: border-box; 
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 0.7em 1em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        footer {
+            background-color: #33333334;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        #home-content .cta-button {
+                    display: inline-block;
+                    padding: 1em 2em;
+                    background-color: #007bff;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    font-weight: bold;
+                    transition: background-color 0.3s ease;
+        }
+        </style>
+        </head>
+<body>
+
+    <header>
+        <h1>Trading Day</h1>
+    </header>
+
+    <nav>
+        <a href="home.html" id="home-link">Home</a>
+        <a href="market.html" id="market-link">Market</a> 
+        <a href="portfolio.html">Protfolio</a>
+        <a href="wallet.html">Wallet</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <main>
+        <div id="home-content">
+            <h2>Welcome to the Trading Platform</h2>
+            <p>Experience seamless and secure trading with our advanced platform. Access real-time market data, execute trades with ease, and manage your portfolio effectively.</p>
+            <p>Start trading today and unlock your financial potential.</p>
+            <a href="home.html" class="cta-button" id="get-started">Get Started</a>
+
+        </div>
+
+         <div class="auth-container" id="login-form" style="display: none;">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+        </div>
+
+        <div class="auth-container" id="signup-form" style="display: none;">
+            <h2>Sign Up</h2>
+            <div class="form-group">
+                <label for="new-username">Username:</label>
+                <input type="text" id="new-username" name="new-username">
+            </div>
+            <div class="form-group">
+                <label for="new-password">Password:</label>
+                <input type="password" id="new-password" name="new-password">
+            </div>
+            <button type="submit">Sign Up</button>
+            <p>Already have an account? <a href="#" id="login-link">Login</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Trading Platform. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const signupLink = document.getElementById('signup-link');
+        const loginLink = document.getElementById('login-link');
+        const homeContent = document.getElementById('home-content');
+        const homeLink = document.getElementById('home-link');
+        const getStartedButton = document.getElementById('get-started');
+        const marketLink = document.getElementById('market-link');
+
+        signupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            homeContent.style.display = 'none';
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+        });
+
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            homeContent.style.display = 'none';
+            signupForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'none';
+            homeContent.style.display = 'block';
+        });
+        getStartedButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        homeContent.style.display = 'none';
+        loginForm.style.display = 'block';
+        });
+        marketLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        homeContent.style.display = 'none';
+        loginForm.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>

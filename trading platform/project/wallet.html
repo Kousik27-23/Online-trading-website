@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Platform - Wallet</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+        #transaction-history {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #transaction-history th,
+        #transaction-history td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #transaction-history th {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Trading Day</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="market.html">Market</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="wallet.html">Wallet</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <main>
+        <div id="wallet-content">
+            <h2>Wallet</h2>
+            <div id="balance-display">Balance: $<span id="balance">10000.00</span></div>
+
+            <div id="deposit-form">
+                <h3>Deposit</h3>
+                <div class="form-group">
+                    <label for="deposit-amount">Amount:</label>
+                    <input type="number" id="deposit-amount" value="0" min="0" step="0.01">
+                </div>
+                <button id="deposit-button">Deposit</button>
+            </div>
+
+            <div id="withdraw-form">
+                <h3>Withdraw</h3>
+                <div class="form-group">
+                    <label for="withdraw-amount">Amount:</label>
+                    <input type="number" id="withdraw-amount" value="0" min="0" step="0.01">
+                </div>
+                <button id="withdraw-button">Withdraw</button>
+            </div>
+
+            <h3>Transaction History</h3>
+            <table id="transaction-history">
+                <thead>
+                    <tr>
+                        <th>Transaction Type</th>
+                        <th>Amount</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody id="transaction-history-body">
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Trading Platform. All rights reserved.</p>
+    </footer>
+    <script>
+        const balanceDisplay = document.getElementById("balance");
+        const depositAmountInput = document.getElementById("deposit-amount");
+        const depositButton = document.getElementById("deposit-button");
+        const withdrawAmountInput = document.getElementById("withdraw-amount");
+        const withdrawButton = document.getElementById("withdraw-button");
+        const transactionHistoryBody = document.getElementById("transaction-history-body");
+        let balance = parseFloat(balanceDisplay.textContent.replace("$", ""));
+        const transactions = []; 
+
+        function addTransaction(type, amount) {
+            const timestamp = new Date().toLocaleString();
+            transactions.push({ type, amount, timestamp });
+            updateTransactionHistory();
+        }
+
+        function updateTransactionHistory() {
+            transactionHistoryBody.innerHTML = ""; 
+
+            transactions.forEach(transaction => {
+                const row = transactionHistoryBody.insertRow();
+                const typeCell = row.insertCell();
+                const amountCell = row.insertCell();
+                const timestampCell = row.insertCell();
+
+                typeCell.textContent = transaction.type;
+                amountCell.textContent = "$" + transaction.amount.toFixed(2);
+                timestampCell.textContent = transaction.timestamp;
+            });
+        }
+
+        depositButton.addEventListener("click", () => {
+            const depositAmount = parseFloat(depositAmountInput.value);
+            if (!isNaN(depositAmount) && depositAmount > 0) {
+                balance += depositAmount;
+                balanceDisplay.textContent = "$" + balance.toFixed(2);
+                depositAmountInput.value = "0";
+                addTransaction("Deposit", depositAmount); 
+            } else {
+                alert("Please enter a valid deposit amount.");
+            }
+        });
+
+        withdrawButton.addEventListener("click", () => {
+            const withdrawAmount = parseFloat(withdrawAmountInput.value);
+            if (!isNaN(withdrawAmount) && withdrawAmount > 0 && withdrawAmount <= balance) {
+                balance -= withdrawAmount;
+                balanceDisplay.textContent = "$" + balance.toFixed(2);
+                withdrawAmountInput.value = "0";
+                addTransaction("Withdrawal", withdrawAmount); 
+            } else if (withdrawAmount > balance) {
+                alert("Insufficient funds.");
+            } else {
+                alert("Please enter a valid withdrawal amount.");
+            }
+        });
+        const walletContent = document.getElementById('wallet-content');
+        const walletLink = document.querySelector('nav a[href="wallet.html"]');
+
+        if (walletLink) {
+            walletLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const homeContent = document.getElementById('home-content');
+                const loginForm = document.getElementById('login-form');
+                const signupForm = document.getElementById('signup-form');
+                const marketContent = document.getElementById('market-content');
+                const portfolioContent = document.getElementById('portfolio-content');
+
+                if (homeContent) homeContent.style.display = 'none';
+                if (loginForm) loginForm.style.display = 'none';
+                if (signupForm) signupForm.style.display = 'none';
+                if (marketContent) marketContent.style.display = 'none';
+                if (portfolioContent) portfolioContent.style.display = 'none';
+
+                walletContent.style.display = 'block';
+                updateTransactionHistory();
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Platform - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+        .buy-button {
+            background-color: #28a745; 
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Trading Day</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="market.html">Market</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="wallet.html">Wallet</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <main>
+        <h2>Portfolio</h2>
+        <table id="portfolio-table">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Quantity</th>
+                    <th>Purchase Price</th>
+                    <th>Current Price</th>
+                    <th>Profit/Loss</th>
+                    <th>Buy</th>
+                    <th>Sell</th>
+                </tr>
+            </thead>
+            <tbody id="portfolio-table-body">
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p>&copy; 2025 Trading Platform. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const portfolioData = [
+            { symbol: "AAPL", quantity: 10, purchasePrice: 150, currentPrice: 155 },
+            { symbol: "GOOG", quantity: 5, purchasePrice: 2500, currentPrice: 2450 },
+            { symbol: "TSLA", quantity: 2, purchasePrice: 800, currentPrice: 820 },
+        ];
+
+        function updatePortfolioTable() {
+            const tableBody = document.getElementById("portfolio-table-body");
+            tableBody.innerHTML = "";
+
+            portfolioData.forEach((item, index) => {
+                const profitLoss = (item.currentPrice - item.purchasePrice) * item.quantity;
+                const row = tableBody.insertRow();
+
+                const cells = [item.symbol, item.quantity, item.purchasePrice, item.currentPrice, profitLoss.toFixed(2)];
+
+                cells.forEach((cellData, index) => {
+                    const cell = row.insertCell();
+                    cell.textContent = cellData;
+
+                    if (index === 4) {
+                        cell.classList.add(profitLoss >= 0 ? "profit" : "loss");
+                    }
+                });
+
+                
+                const buyCell = row.insertCell();
+                const buyButton = document.createElement("button");
+                buyButton.textContent = "Buy";
+                buyButton.classList.add("buy-button");
+                buyButton.dataset.index = index;
+                buyButton.addEventListener("click", () => handleBuy(buyButton.dataset.index));
+                buyCell.appendChild(buyButton);
+
+                
+                const sellCell = row.insertCell();
+                const sellButton = document.createElement("button");
+                sellButton.textContent = "Sell";
+                sellButton.classList.add("sell-button");
+                sellButton.dataset.index = index;
+
+                sellButton.addEventListener("click", () => handleSell(sellButton.dataset.index));
+                sellCell.appendChild(sellButton);
+            });
+        }
+
+        function handleSell(index) {
+          const itemIndex = parseInt(index);
+          if (itemIndex >= 0 && itemIndex < portfolioData.length) {
+              const soldItem = portfolioData.splice(itemIndex, 1)[0];
+              console.log("Sold:", soldItem);
+              updatePortfolioTable();
+              alert(`You have sold ${soldItem.quantity} shares of ${soldItem.symbol} at ${soldItem.currentPrice}`);
+          }
+        }
+
+        function handleBuy(index) {
+            const itemIndex = parseInt(index);
+            if (itemIndex >= 0 && itemIndex < portfolioData.length) {
+                const boughtItem = portfolioData[itemIndex];
+                boughtItem.quantity++;
+                console.log("Bought:", boughtItem);
+                updatePortfolioTable();
+                alert(`You have bought 1 share of ${boughtItem.symbol} at ${boughtItem.currentPrice}`);
+            }
+        }
+
+        updatePortfolioTable();
+    </script>
+
+</body>
+
+</html>

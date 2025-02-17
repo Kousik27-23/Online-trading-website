@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Day</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #843333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; 
+            background-image: url("https://4kwallpapers.com/images/wallpapers/day-trading-8k-5k-3840x2160-13776.png"); /* Replace with your image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+            color: rgb(255, 0, 0); 
+        }
+
+        header {
+            background-color: #33333300;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #4444440d;
+            color: white;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin: 0 1em;
+        }
+
+        main {
+            padding: 2em;
+            flex-grow: 1; 
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+        }
+
+        .auth-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2em;
+            border-radius: 30px;
+            box-shadow: 0 2px 4px rgb(2, 2, 2);
+            width: 300px;
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+
+        .form-group {
+            margin-bottom: 1em;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+        input[type="text"],
+        input[type="password"] 
+        {
+            width: 100%;
+            padding: 0.5em;
+            border: 1px solid #00000000;
+            border-radius: 5px;
+            box-sizing: border-box; 
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 0.7em 1em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        footer {
+            background-color: #33333334;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Trading Day</h1>
+    </header>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="market.html">Market</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="wallet.html">Wallet</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+    <main>
+        <div class="auth-container" id="login-form">
+            <h2>Login</h2> 
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+            <a href="home.html"></a>
+        </div>
+
+        <div class="auth-container" id="signup-form" style="display: none;">
+            <h2>Sign Up</h2>
+            <div class="form-group">
+                <label for="new-username">Username:</label>
+                <input type="text" id="new-username" name="new-username">
+            </div>
+            <div class="form-group">
+                <label for="new-password">Password:</label>
+                <input type="password" id="new-password" name="new-password">
+            </div>
+            <button type="submit">Sign Up</button>
+            <p>Already have an account? <a href="#" id="login-link">Login</a></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Trading Platform. All rights reserved.</p>
+    </footer>
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const signupLink = document.getElementById('signup-link');
+        const loginLink = document.getElementById('login-link');
+
+        signupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+        });
+
+        loginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>

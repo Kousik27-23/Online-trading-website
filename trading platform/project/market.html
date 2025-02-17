@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Day - Market</title>
+    <style>
+        /* ... (Previous styles) */
+        body{
+            background-image: url("https://4kwallpapers.com/images/wallpapers/day-trading-8k-5k-3840x2160-13776.png"); /* Replace with your image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        nav {
+            background-color: #4444440d;
+            color: white;
+            padding: 0;
+            text-align: center;
+        }
+        nav a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin: 0 1em;
+        }
+
+        #market-content {
+            display: none; /* Hidden by default */
+            padding:10px;
+
+            color: rgb(226, 218, 218); /* Ensure text is visible on background */
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column;
+            align-items: center;
+
+
+        }
+        #market-content > * {
+            margin-bottom: 20px;
+        }
+        .market-section {
+            background-color:rgba(0, 0, 0, 0.373);
+            padding: 20px;            
+            
+            border-radius: 8px;
+            width: 80%; /* Adjust width as needed */
+            max-width: 900px;
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        .market-section h2 {
+            margin-top: 0;
+            color: rgb(255, 255, 255);
+            text-align: center;
+        }
+        #chart-container {
+            background-image:url("https://honeypips.com/wp-content/uploads/2021/11/institutional-candles-forex.jpg");
+            width: 100%;
+            height: 400px; /* Adjust height as needed */
+            background-color: #ffffff; /* Placeholder for chart */
+            border: 1px solid #ccc;
+        }
+        .order-form {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .form-group {
+            margin-bottom: 10px;
+            width: 45%; /* Adjust width for responsiveness */
+            box-sizing: border-box;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            color: black;
+        }
+        .order-buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .order-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 45%;
+        }
+        .buy-button {
+            background-color: green;
+            color: white;
+        }
+        .sell-button {
+            background-color: red;
+            color: white;
+        }
+        @media (max-width: 600px) { /* Styles for smaller screens */
+            .form-group {
+                width: 100%; /* Full width on small screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Trading Day</h1>
+     </header>
+    
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="market.html">Market</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="wallet.html">Wallet</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+    <main>
+        <div id="home-content">
+            </div>
+
+        <div class="auth-container" id="login-form" style="display: none;">
+            </div>
+
+        <div class="auth-container" id="signup-form" style="display: none;">
+            </div>
+
+        <div id="market-content">
+            <div class="market-section">
+                <h2>Live Chart</h2>
+                <div id="chart-container">
+                    </div>
+            </div>
+            <div class="market-section">
+                <h2>Order Entry</h2>
+                <div class="order-form">
+                    <div class="form-group">
+                        <label for="symbol">Symbol:</label>
+                        <input type="text" id="symbol" value="AAPL" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="number" id="price" value="150" step="0.01">
+                    </div>
+                     <div class="form-group">
+                        <label for="type">Order Type:</label>
+                        <select id="type">
+                          <option value="market">Market</option>
+                          <option value="limit">Limit</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="order-buttons">
+                    <button class="buy-button">Buy</button>
+                    <button class="sell-button">Sell</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        // ... (Previous JavaScript)
+        const marketContent = document.getElementById('market-content');
+        marketLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            homeContent.style.display = 'none';
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'none';
+            marketContent.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
